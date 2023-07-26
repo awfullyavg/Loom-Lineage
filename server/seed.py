@@ -11,7 +11,8 @@ def create_families():
             name= fake.name(),
             parent= fake.name(),
             children= fake.name(),
-            sibling= fake.name()
+            sibling= fake.name(),
+            user_id= User.id
         )
         families.append(f)
 
