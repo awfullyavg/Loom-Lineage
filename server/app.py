@@ -42,6 +42,23 @@ class UsersById(Resource):
     
 api.add_resource(UsersById, '/users/<int:id>')
 
+class FamiliesById(Resource):
+    def get(self, id):
+        family = Family.query.filter(Family.id == id).first()
+
+        if not family:
+            return make_response('{error: "user not found"}', 404)
+        
+        return make_response(family.to_dict(), 200)
+    
+api.add_resource(FamiliesById, '/family/<int:id>') #Should it be '/user/family/<int:id>' ?
+
+class Looms(Resource):
+    def get(self):
+        looms_list = [loom.to_dict() for loom in Loom.query.all()]
+
+        return make_response(looms_list, 200)
+api.add_resource(Looms, '/looms')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
