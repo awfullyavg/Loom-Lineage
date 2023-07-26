@@ -42,7 +42,7 @@ class UsersById(Resource):
         return make_response(user.to_dict(rules=('-families','-loom_id')), 200) #Might want to get rid of the loom_id rule to see each users loom_id   
 api.add_resource(UsersById, '/users/<int:id>')
 
-class FamiliesById(Resource):
+class FamiliesById(Resource): #still needs a post, patch and delete
     def get(self, id):
         family = Family.query.filter(Family.id == id).first()
 
@@ -53,7 +53,7 @@ class FamiliesById(Resource):
 api.add_resource(FamiliesById, '/family/<int:id>') #Should it be '/user/family/<int:id>' ?
 
 
-class Looms(Resource):
+class Looms(Resource): #still needs a patch and delete
     def get(self):
         looms_list = [loom.to_dict() for loom in Loom.query.all()]
 
@@ -78,7 +78,7 @@ class Looms(Resource):
             return make_response('{errors:["validation errors"]}', 400)
 api.add_resource(Looms, '/looms')
 
-class Events(Resource):
+class Events(Resource): #still needs a patch and delete
     def get(self):
         events_list = [event.to_dict() for event in Event.query.all()]
 
