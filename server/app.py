@@ -78,7 +78,27 @@ class Looms(Resource):
             return make_response('{errors:["validation errors"]}', 400)
 api.add_resource(Looms, '/looms')
 
+class Events(Resource):
+    def get(self):
+        events_list = [event.to_dict() for event in Event.query.all()]
 
+        return make_response(events_list, 200)
+    
+    def post(self):
+        data = request.get_json()
+
+        try:
+            new_event = Event(
+                name = data['name'],
+                description = data['description']
+            )
+
+            db.session.add(new_event)
+            db.session.commit()
+        
+        except ValueError:
+            return make_response('{errors:["validation errors"]}', 400)
+api.add_resource(Events, '/events')
 
 
 
