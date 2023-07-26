@@ -31,6 +31,7 @@ class Users(Resource):
         return make_response(users_list, 200)
 api.add_resource(Users, '/users')
 
+
 class UsersById(Resource):
     def get(self, id):
         user = User.query.filter(User.id == id).first()
@@ -38,8 +39,7 @@ class UsersById(Resource):
         if not user:
             return make_response('{error: "user not found"}', 404)
         
-        return make_response(user.to_dict(rules=('-families','-loom_id')), 200) #Might want to get rid of the loom_id rule to see each users loom_id
-    
+        return make_response(user.to_dict(rules=('-families','-loom_id')), 200) #Might want to get rid of the loom_id rule to see each users loom_id   
 api.add_resource(UsersById, '/users/<int:id>')
 
 class FamiliesById(Resource):
@@ -50,15 +50,37 @@ class FamiliesById(Resource):
             return make_response('{error: "user not found"}', 404)
         
         return make_response(family.to_dict(), 200)
-    
 api.add_resource(FamiliesById, '/family/<int:id>') #Should it be '/user/family/<int:id>' ?
+
 
 class Looms(Resource):
     def get(self):
         looms_list = [loom.to_dict() for loom in Loom.query.all()]
 
         return make_response(looms_list, 200)
+    
+    def post(self):
+        data = request.get_json()
+
+        try:
+            new_loom = Loom(
+                lineage = data['lineage'],
+                photos = data['photos'],
+                family_id = data['family_id'],
+                event_id = data['event_id']
+            )
+
+            db.session.add(new_loom)
+            db.session.commit()
+            return make_response(new_loom.to_dict(), 201)
+        
+        except ValueError:
+            return make_response('{errors:["validation errors"]}', 400)
 api.add_resource(Looms, '/looms')
+
+
+
+
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
