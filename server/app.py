@@ -24,6 +24,13 @@ api = Api(app) #may or may not use RESTful
 def home():
     return ''
 
+class Users(Resource):
+    def get(self):
+        users_list = [user.to_dict(rules=('-families','-loom_id')) for user in User.query.all()]
+
+        return make_response(users_list, 200)
+api.add_resource(Users, '/users')
+
 class UsersById(Resource):
     def get(self, id):
         user = User.query.filter(User.id == id).first()
@@ -31,7 +38,10 @@ class UsersById(Resource):
         if not user:
             return make_response('{error: "user not found"}', 404)
         
-        return make_response(user.to_dict(), 200)
+        return make_response(user.to_dict(rules=('-families','-loom_id')), 200) #Might want to get rid of the loom_id rule to see each users loom_id
     
 api.add_resource(UsersById, '/users/<int:id>')
-        
+
+
+if __name__ == '__main__':
+    app.run(port=5555, debug=True)
