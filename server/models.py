@@ -33,10 +33,11 @@ class Family(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
-    parent = db.Column(db.String) #Probably should be mother father
-    partner = db.Column(db.String) #Might not need this. Parents should be enough? Parent = Partner?
+    mother = db.Column(db.String) #Was parent
+    father = db.Column(db.String)
+    partner = db.Column(db.String)
     children = db.Column(db.String)
-    sibling = db.Column(db.String)
+    sibling = db.Column(db.String) #useless?
 
     #relationships
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))

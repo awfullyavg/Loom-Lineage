@@ -9,10 +9,11 @@ def create_families():
     for _ in range(4):
         f = Family(
             name= fake.name(),
-            parent= fake.name(),
+            mother = fake.name(),
+            father = fake.name(),
+            partner = fake.name(),
             children= fake.name(),
-            sibling= fake.name(),
-            user_id= User.id
+            sibling= fake.name()
         )
         families.append(f)
 
@@ -64,7 +65,7 @@ if __name__ == '__main__':
                     password = 'brown1234'
                     )
                  ]
-        db.session.add_all('users')
+        db.session.add_all(users)
 
         print('seeding families...')
         families = create_families()
