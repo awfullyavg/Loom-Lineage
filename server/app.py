@@ -18,7 +18,7 @@ migrate = Migrate(app, db)
 
 db.init_app(app)
 
-api = Api(app) #may or may not use RESTful 
+api = Api(app)
 
 @app.route('/')
 def home():
@@ -29,6 +29,24 @@ class Users(Resource):
         users_list = [user.to_dict(rules=('-families','-loom_id')) for user in User.query.all()]
 
         return make_response(users_list, 200)
+    
+    def post(self):
+        data = request.get_json()
+
+        try:
+            new_user = User(
+                fname = data['fname'],
+                lname = data['lname'],
+                email = data['email'],
+                password = data['password']
+            )
+
+            db.session.add(new_user)
+            db.session.commit()
+            return make_response(new_user.to_dict(), 201)
+
+        except ValueError:
+            return make_response('{errors:["validation errors"]}', 400)
 api.add_resource(Users, '/users')
 
 
@@ -53,7 +71,7 @@ class FamiliesById(Resource): #still needs a post, patch and delete
 api.add_resource(FamiliesById, '/family/<int:id>') #Should it be '/user/family/<int:id>' ?
 
 
-class Looms(Resource): #still needs a patch and delete
+class Looms(Resource):
     def get(self):
         looms_list = [loom.to_dict() for loom in Loom.query.all()]
 
@@ -73,12 +91,39 @@ class Looms(Resource): #still needs a patch and delete
             db.session.add(new_loom)
             db.session.commit()
             return make_response(new_loom.to_dict(), 201)
-        
+
         except ValueError:
             return make_response('{errors:["validation errors"]}', 400)
 api.add_resource(Looms, '/looms')
 
-class Events(Resource): #still needs a patch and delete
+class LoomsById(Resource):
+    def patch(self, id):
+        loom = Looms.query.filter(Loom.id == id).first()
+
+        if not loom:
+            return make_response('Loom not found', 404)
+        try:
+            data = request.get_json()
+            for key in data:
+                setattr(loom, key, data[key])
+            db.session.add(loom)
+            db.session.commit()
+            return make_response(loom.to_dict(), 202)
+        except ValueError:
+            return make_response('{errors:["validation errors"]}', 400)
+
+    def delete(self, id):
+        looms = Loom.query.filter(Loom.id == id).first()
+
+        if not looms:
+            return make_response('{errors:["validation errors"]}')
+        
+        db.session.delete(looms)
+        db.session.commit()
+        return make_response('DELETED', 204)
+api.add_resource(LoomsById, '/looms/<int:id>')
+
+class Events(Resource): #still needs a patch
     def get(self):
         events_list = [event.to_dict() for event in Event.query.all()]
 
@@ -98,6 +143,15 @@ class Events(Resource): #still needs a patch and delete
         
         except ValueError:
             return make_response('{errors:["validation errors"]}', 400)
+        
+    def delete(self, id):
+        events = Event.query.filter(Event.id == id).first()
+        if not events:
+            return make_response({"error: Event not found"}, 404)
+        
+        db.session.delete(events)
+        db.session.commit()
+        return make_response('DELETED', 204)
 api.add_resource(Events, '/events')
 
 
