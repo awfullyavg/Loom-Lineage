@@ -60,6 +60,7 @@ class UsersById(Resource):
         return make_response(user.to_dict(rules=('-families','-loom_id')), 200) #Might want to get rid of the loom_id rule to see each users loom_id   
 api.add_resource(UsersById, '/users/<int:id>')
 
+
 class FamiliesById(Resource): #still needs a post, patch and delete
     def get(self, id):
         family = Family.query.filter(Family.id == id).first()
