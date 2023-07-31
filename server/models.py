@@ -37,7 +37,6 @@ class Family(db.Model, SerializerMixin):
     father = db.Column(db.String)
     partner = db.Column(db.String)
     children = db.Column(db.String)
-    sibling = db.Column(db.String) #useless?
 
     #relationships
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))

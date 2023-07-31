@@ -75,7 +75,6 @@ class Families(Resource):
                 father= data['father'],
                 partner= data['partner'],
                 children= ['children'],
-                # sibling= data['sibling'] If I have two children that auto amkes them siblings. 
             )
 
             db.session.add(new_family)
@@ -135,7 +134,7 @@ class Looms(Resource):
         try:
             new_loom = Loom(
                 lineage = data['lineage'],
-                photos = data['photos'],
+                photos = data['photos'], #Might want to take this out and have users add via frontend.
                 family_id = data['family_id'],
                 event_id = data['event_id']
             )

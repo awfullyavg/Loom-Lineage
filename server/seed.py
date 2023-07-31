@@ -13,7 +13,6 @@ def create_families():
             father = fake.name(),
             partner = fake.name(),
             children= fake.name(),
-            sibling= fake.name()
         )
         families.append(f)
 
