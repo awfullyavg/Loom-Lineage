@@ -145,14 +145,15 @@ class Events(Resource): #still needs a patch
         except ValueError:
             return make_response('{errors:["validation errors"]}', 400)
         
-    def delete(self, id):
-        events = Event.query.filter(Event.id == id).first()
-        if not events:
-            return make_response({"error: Event not found"}, 404)
+# Need to put in EventsByID class
+    # def delete(self, id):
+    #     events = Event.query.filter(Event.id == id).first()
+    #     if not events:
+    #         return make_response({"error: Event not found"}, 404)
         
-        db.session.delete(events)
-        db.session.commit()
-        return make_response('DELETED', 204)
+    #     db.session.delete(events)
+    #     db.session.commit()
+    #     return make_response('DELETED', 204)
 api.add_resource(Events, '/events')
 
 
