@@ -60,6 +60,32 @@ class UsersById(Resource):
         return make_response(user.to_dict(rules=('-families','-loom_id')), 200) #Might want to get rid of the loom_id rule to see each users loom_id   
 api.add_resource(UsersById, '/users/<int:id>')
 
+class Families(Resource):
+    def get(self):
+        family_list = [family.to_dict() for family in Family.query.all()]
+        return make_response(family_list, 200)
+    
+    def post(self):
+        data = request.get_json()
+
+        try:
+            new_family = Family(
+                name= data['name'],
+                mother= data['mother'],
+                father= data['father'],
+                partner= data['partner'],
+                children= ['children'],
+                # sibling= data['sibling'] If I have two children that auto amkes them siblings. 
+            )
+
+            db.session.add(new_family)
+            db.session.commit()
+            return make_response(new_family.to_dict(), 201)
+        
+        except ValueError:
+            return make_response('{errors:["validation errors"]}', 400)
+api.add_resource(Families, '/families')
+
 
 class FamiliesById(Resource): #still needs a post, patch and delete
     def get(self, id):
