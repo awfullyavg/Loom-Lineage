@@ -87,7 +87,7 @@ class Families(Resource):
 api.add_resource(Families, '/families')
 
 
-class FamiliesById(Resource): #still needs a post, patch and delete
+class FamiliesById(Resource):
     def get(self, id):
         family = Family.query.filter(Family.id == id).first()
 
@@ -95,6 +95,31 @@ class FamiliesById(Resource): #still needs a post, patch and delete
             return make_response('{error: "user not found"}', 404)
         
         return make_response(family.to_dict(), 200)
+    
+    def patch(self, id):
+        family = Family.query.filter(Family.id == id).first()
+
+        if not family:
+            return make_response('Family not found', 404)
+        try:
+            data = request.get_json()
+            for key in data:
+                setattr(family, key, data[key])
+            db.session.add(family)
+            db.session.commit()
+            return make_response(family.to_dict(), 202)
+        except ValueError:
+            return make_response('{errors:["validation errors"]}', 400)
+        
+    def delete(self, id):
+        families = Family.query.filter(Family.id == id).first()
+
+        if not families:
+            return make_response('{errors:["validation errors"]}')
+        
+        db.session.delete(families)
+        db.session.commit()
+        return make_response('DELETED', 204)
 api.add_resource(FamiliesById, '/family/<int:id>') #Should it be '/user/family/<int:id>' ?
 
 
@@ -150,7 +175,7 @@ class LoomsById(Resource):
         return make_response('DELETED', 204)
 api.add_resource(LoomsById, '/looms/<int:id>')
 
-class Events(Resource): #still needs a patch
+class Events(Resource):
     def get(self):
         events_list = [event.to_dict() for event in Event.query.all()]
 
@@ -170,19 +195,41 @@ class Events(Resource): #still needs a patch
         
         except ValueError:
             return make_response('{errors:["validation errors"]}', 400)
-        
-# Need to put in EventsByID class
-    # def delete(self, id):
-    #     events = Event.query.filter(Event.id == id).first()
-    #     if not events:
-    #         return make_response({"error: Event not found"}, 404)
-        
-    #     db.session.delete(events)
-    #     db.session.commit()
-    #     return make_response('DELETED', 204)
 api.add_resource(Events, '/events')
 
+class EventsById(Resource):
+    def get(self, id):
+        events = Event.query.filter(Event.id == id).first()
 
+        if not events:
+            return make_response('{error: "event not found"}', 404)
+        
+        return make_response(events.to_dict(), 200)
+    
+    def patch(self, id):
+        event = Event.query.filter(Event.id == id).first()
+
+        if not event:
+            return make_response('Event not found', 404)
+        try:
+            data = request.get_json()
+            for key in data:
+                setattr(event, key, data[key])
+            db.session.add(event)
+            db.session.commit()
+            return make_response(event.to_dict(), 202)
+        except ValueError:
+            return make_response('{errors:["validation errors"]}', 400)
+        
+    def delete(self, id):
+        events = Event.query.filter(Event.id == id).first()
+        if not events:
+            return make_response({"error: Event not found"}, 404)
+        
+        db.session.delete(events)
+        db.session.commit()
+        return make_response('DELETED', 204)
+api.add_resource(EventsById, '/events/<int:id>')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
