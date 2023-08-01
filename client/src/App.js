@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
-import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Home from './Home/Home';
 import Navbar from './Header/Navbar';
+import {BrowserRouter, Routes, Route} from "react-router-dom"
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
 
       <div>
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route path='/' element={<Home />}></Route>
         </Routes>
       </div>
 
