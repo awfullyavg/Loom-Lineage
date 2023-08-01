@@ -60,8 +60,33 @@ class UsersById(Resource):
         return make_response(user.to_dict(rules=('-families','-loom_id')), 200) #Might want to get rid of the loom_id rule to see each users loom_id   
 api.add_resource(UsersById, '/users/<int:id>')
 
+class Families(Resource):
+    def get(self):
+        family_list = [family.to_dict(rules=('-looms', '-user_id')) for family in Family.query.all()]
+        return make_response(family_list, 200)
+    
+    def post(self):
+        data = request.get_json()
 
-class FamiliesById(Resource): #still needs a post, patch and delete
+        try:
+            new_family = Family(
+                name= data['name'],
+                mother= data['mother'],
+                father= data['father'],
+                partner= data['partner'],
+                children= data['children'],
+            )
+
+            db.session.add(new_family)
+            db.session.commit()
+            return make_response(new_family.to_dict(), 201)
+        
+        except ValueError:
+            return make_response('{errors:["validation errors"]}', 400)
+api.add_resource(Families, '/families')
+
+
+class FamiliesById(Resource):
     def get(self, id):
         family = Family.query.filter(Family.id == id).first()
 
@@ -69,6 +94,31 @@ class FamiliesById(Resource): #still needs a post, patch and delete
             return make_response('{error: "user not found"}', 404)
         
         return make_response(family.to_dict(), 200)
+    
+    def patch(self, id):
+        family = Family.query.filter(Family.id == id).first()
+
+        if not family:
+            return make_response('Family not found', 404)
+        try:
+            data = request.get_json()
+            for key in data:
+                setattr(family, key, data[key])
+            db.session.add(family)
+            db.session.commit()
+            return make_response(family.to_dict(), 202)
+        except ValueError:
+            return make_response('{errors:["validation errors"]}', 400)
+        
+    def delete(self, id):
+        families = Family.query.filter(Family.id == id).first()
+
+        if not families:
+            return make_response('{errors:["validation errors"]}')
+        
+        db.session.delete(families)
+        db.session.commit()
+        return make_response('DELETED', 204)
 api.add_resource(FamiliesById, '/family/<int:id>') #Should it be '/user/family/<int:id>' ?
 
 
@@ -84,7 +134,7 @@ class Looms(Resource):
         try:
             new_loom = Loom(
                 lineage = data['lineage'],
-                photos = data['photos'],
+                photos = data['photos'], #Might want to take this out and have users add via frontend.
                 family_id = data['family_id'],
                 event_id = data['event_id']
             )
@@ -124,7 +174,7 @@ class LoomsById(Resource):
         return make_response('DELETED', 204)
 api.add_resource(LoomsById, '/looms/<int:id>')
 
-class Events(Resource): #still needs a patch
+class Events(Resource):
     def get(self):
         events_list = [event.to_dict() for event in Event.query.all()]
 
@@ -144,19 +194,41 @@ class Events(Resource): #still needs a patch
         
         except ValueError:
             return make_response('{errors:["validation errors"]}', 400)
-        
-# Need to put in EventsByID class
-    # def delete(self, id):
-    #     events = Event.query.filter(Event.id == id).first()
-    #     if not events:
-    #         return make_response({"error: Event not found"}, 404)
-        
-    #     db.session.delete(events)
-    #     db.session.commit()
-    #     return make_response('DELETED', 204)
 api.add_resource(Events, '/events')
 
+class EventsById(Resource):
+    def get(self, id):
+        events = Event.query.filter(Event.id == id).first()
 
+        if not events:
+            return make_response('{error: "event not found"}', 404)
+        
+        return make_response(events.to_dict(), 200)
+    
+    def patch(self, id):
+        event = Event.query.filter(Event.id == id).first()
+
+        if not event:
+            return make_response('Event not found', 404)
+        try:
+            data = request.get_json()
+            for key in data:
+                setattr(event, key, data[key])
+            db.session.add(event)
+            db.session.commit()
+            return make_response(event.to_dict(), 202)
+        except ValueError:
+            return make_response('{errors:["validation errors"]}', 400)
+        
+    def delete(self, id):
+        events = Event.query.filter(Event.id == id).first()
+        if not events:
+            return make_response({"error: Event not found"}, 404)
+        
+        db.session.delete(events)
+        db.session.commit()
+        return make_response('DELETED', 204)
+api.add_resource(EventsById, '/events/<int:id>')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
