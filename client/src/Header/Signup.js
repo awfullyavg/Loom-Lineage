@@ -1,7 +1,22 @@
 import React from "react";
+import { useEffect, useState } from "react";
 
 
 function Signup () {
+    const [user, setUser] = useState([])
+
+    useEffect(() => {
+        fetch("/users")
+        .then(resp => resp.json())
+        .then(data => setUser(data))
+    }, [])
+
+    const handleSubmit = () => {
+        
+    }
+
+
+
     return (
         <div className="signup">
             <h1>Start to track your Lineage now!</h1><br></br>
