@@ -33,11 +33,17 @@ function Navbar () {
             </div>
 
             <div>
-                <button className="login-button" onClick={handleOpen}>Login</button>
-                <Modal isOpen={open} onRequestClose={handleClose} contentLabel="Login" >
+                <button className="login-button-modal" onClick={handleOpen}>Login</button>
+                <Modal className='' isOpen={open} onRequestClose={handleClose} contentLabel="Login" >
                     <h1>Please Login</h1>
                     <div>
-
+                        <form onSubmit={''}>
+                            <label>Email:</label><br></br>
+                            <input type="text" id="email" onChange={(e) => ('') } ></input><br></br>
+                            <label>Password:</label><br></br>
+                            <input type="password" id="password" onChange={(e) => ('') } ></input><br></br>
+                            <button className="login-button">Login</button>
+                        </form>
                     </div>
 
                 </Modal>
