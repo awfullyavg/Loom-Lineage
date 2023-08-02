@@ -4,6 +4,10 @@ import { useEffect, useState } from "react";
 
 function Signup () {
     const [user, setUser] = useState([])
+    const [fname, setFname] = useState('')
+    const [lname, setLname] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
 
     useEffect(() => {
         fetch("/users")
@@ -12,7 +16,14 @@ function Signup () {
     }, [])
 
     const handleSubmit = () => {
-        
+        //e.preventDefault()
+
+        const new_user = {
+            fname: fname,
+            lname: lname,
+            email: email,
+            password: password
+        }
     }
 
 
