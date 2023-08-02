@@ -12,4 +12,8 @@
     @apply h-auto max-w-xs;
   }
 
+  .signup {
+    @apply bg-Nyanza;
+  }
+
 }
