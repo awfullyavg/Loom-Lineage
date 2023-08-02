@@ -36,7 +36,7 @@ function Signup () {
         .then(resp => resp.json())
         .then(new_user => setUsers([...users, new_user]))
 
-
+        alert('Thank you for signing up!')
     }
 
 
@@ -52,7 +52,7 @@ function Signup () {
                 <label>Email: </label><br></br>
                 <input type="text" placeholder="Enter Email" onChange={(e) => setEmail(e.target.value)} value={email}></input><br></br>
                 <label>Password: </label><br></br>
-                <input type="text" placeholder="Enter Password" onChange={(e) => (e.target.value)} ></input><br></br>
+                <input type="password" onChange={(e) => setPassword(e.target.value)} value={password} /><br></br>
                 <br></br>
                 <button className='bg-Chinese-Violet text-white'>Submit</button>
             </form>
