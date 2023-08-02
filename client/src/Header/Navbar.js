@@ -20,6 +20,7 @@ function Navbar () {
                 <span class="font-medium dark:text-neutral-200">Loom Lineage</span>
             </a>
             </div>
+            
         </div>
         </nav>
 
