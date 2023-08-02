@@ -4,6 +4,12 @@
 
 @layer components {
 
-
+  .home {
+    @apply bg-Nyanza ;
+  }
+  
+  .logo-container {
+    @apply h-auto max-w-xs;
+  }
 
 }

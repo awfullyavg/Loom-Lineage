@@ -1,15 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import Home from './Home/Home';
-import Navbar from './Header/Navbar';
+import Header from './Header/Header';
 import {BrowserRouter, Routes, Route} from "react-router-dom"
+import './index.css';
 
 function App() {
   return (
-    <div className="main">
-      <nav className='navbar-container'>
-        <Navbar />
-      </nav>
-
+    <div className='main'>
+      <div>
+        <Header />
+      </div>
       <div>
         <Routes>
           <Route path='/' element={<Home />}></Route>

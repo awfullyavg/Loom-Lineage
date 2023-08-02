@@ -2,8 +2,8 @@ import React from "react";
 
 function Logo() {
     return (
-        <div>
-            <a href="https://imgur.com/65lVEcT"><img src="https://i.imgur.com/65lVEcT.png" title="source: imgur.com" /></a>
+        <div className='logo'>
+            <a href="https://imgur.com/32wqxFa"><img src="https://i.imgur.com/32wqxFa.png" title="source: imgur.com" /></a>
         </div>
     )
 }
