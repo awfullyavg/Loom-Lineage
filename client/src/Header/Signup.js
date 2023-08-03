@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 
 function Signup () {
-    const [user, setUser] = useState([])
+    const [users, setUsers] = useState([])
     const [fname, setFname] = useState('')
     const [lname, setLname] = useState('')
     const [email, setEmail] = useState('')
@@ -12,11 +12,11 @@ function Signup () {
     useEffect(() => {
         fetch("/users")
         .then(resp => resp.json())
-        .then(data => setUser(data))
+        .then(data => setUsers(data))
     }, [])
 
     const handleSubmit = () => {
-        //e.preventDefault()
+        // e.preventDefault()
 
         const new_user = {
             fname: fname,
@@ -24,6 +24,19 @@ function Signup () {
             email: email,
             password: password
         }
+
+        fetch('/users', {
+            method: 'POST',
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+            },
+            body : JSON.stringify(new_user)
+        })
+        .then(resp => resp.json())
+        .then(new_user => setUsers([...users, new_user]))
+
+        alert('Thank you for signing up!')
     }
 
 
@@ -31,15 +44,15 @@ function Signup () {
     return (
         <div className="signup">
             <h1>Start to track your Lineage now!</h1><br></br>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <label>First Name: </label><br></br>
-                <input type="text" placeholder="Enter First Name"></input><br></br>
+                <input type="text" placeholder="Enter First Name" onChange={(e) => setFname(e.target.value)} value={fname}></input><br></br>
                 <label>Last Name: </label><br></br>
-                <input type="text" placeholder="Enter Last Name"></input><br></br>
+                <input type="text" placeholder="Enter Last Name" onChange={(e) => setLname(e.target.value)} value={lname}></input><br></br>
                 <label>Email: </label><br></br>
-                <input type="text" placeholder="Enter Email"></input><br></br>
+                <input type="text" placeholder="Enter Email" onChange={(e) => setEmail(e.target.value)} value={email}></input><br></br>
                 <label>Password: </label><br></br>
-                <input type="password" placeholder="Enter Password"></input><br></br>
+                <input type="password" onChange={(e) => setPassword(e.target.value)} value={password} /><br></br>
                 <br></br>
                 <button className='bg-Chinese-Violet text-white'>Submit</button>
             </form>
