@@ -17,6 +17,7 @@ class User(db.Model, SerializerMixin):
     fname = db.Column(db.String)
     lname = db.Column(db.String)
     email = db.Column(db.String)
+    username = db.Column(db.String)
     password = db.Column(db.String)
 
 

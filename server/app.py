@@ -38,6 +38,7 @@ class Users(Resource):
                 fname = data['fname'],
                 lname = data['lname'],
                 email = data['email'],
+                username= data['username'],
                 password = data['password']
             )
 

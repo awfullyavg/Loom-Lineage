@@ -33,6 +33,7 @@ if __name__ == '__main__':
                     fname = 'John',
                     lname = 'Doe',
                     email = 'john.doe@example.com',
+                    username = 'johndoe',
                     password = 'hello123'
                     ),
 
@@ -47,6 +48,7 @@ if __name__ == '__main__':
                     fname = 'Michael',
                     lname = 'Johnson',
                     email = 'michael.johnson@example.com',
+                    username = 'mjohnson',
                     password = 'securepass'
                     ),
 
@@ -54,6 +56,7 @@ if __name__ == '__main__':
                     fname = 'Sarah',
                     lname = 'Williams',
                     email = 'sarah.williams@example.com',
+                    username = 'sarawilliams',
                     password =  'mysecretpass'
                     ),
                 
@@ -61,9 +64,66 @@ if __name__ == '__main__':
                     fname = 'David',
                     lname = 'Brown',
                     email = 'david.brown@example.com',
+                    username = 'davidbrown',
                     password = 'brown1234'
                     )
                  ]
+        
+        # user1 = [
+        #             User(
+        #             fname = 'John',
+        #             lname = 'Doe',
+        #             email = 'john.doe@example.com',
+        #             username = 'johndoe',
+        #             password = 'hello123'
+        #             )
+        # ],
+
+        # user2 = [
+        #             User(
+        #             fname = 'Jane',
+        #             lname = 'Smith',
+        #             email = 'jane.smith@example.com',
+        #             username = 'janesmith',
+        #             password = 'password123'
+        #             )
+        # ],
+
+        # user3 = [
+        #             User(
+        #             fname = 'Michael',
+        #             lname = 'Johnson',
+        #             email = 'michael.johnson@example.com',
+        #             username = 'mjohnson',
+        #             password = 'securepass'
+        #             )
+        # ],
+
+        # user4 = [
+        #             User(
+        #             fname = 'Sarah',
+        #             lname = 'Williams',
+        #             email = 'sarah.williams@example.com',
+        #             username = 'sarawilliams',
+        #             password =  'mysecretpass'
+        #             )
+        # ],
+        
+        # user5 = [
+        #             User(
+        #             fname = 'David',
+        #             lname = 'Brown',
+        #             email = 'david.brown@example.com',
+        #             username = 'davidbrown',
+        #             password = 'brown1234'
+        #             )
+        # ]
+
+        # db.session.add(user1)
+        # db.session.add(user2)
+        # db.session.add(user3)
+        # db.session.add(user4)
+        # db.session.add(user5)
         db.session.add_all(users)
 
         print('seeding families...')
