@@ -15,7 +15,15 @@ class User(db.Model, SerializerMixin):
     lname = db.Column(db.String)
     email = db.Column(db.String)
     username = db.Column(db.String)
-    password = db.Column(db.String)
+    _password_hash = db.Column(db.String)
+
+    @validates('username')
+    def validates_username(self, key, username):
+        if username and len(username) >= 3:
+            return username
+        else:
+            raise ValueError('Username is to short')
+
 
 
     #relationships

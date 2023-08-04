@@ -25,7 +25,7 @@ class Users(Resource):
                 lname = data['lname'],
                 email = data['email'],
                 username= data['username'],
-                password = data['password']
+                _password_hash = data['_password_hash']
             )
 
             db.session.add(new_user)
