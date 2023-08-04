@@ -19,7 +19,7 @@ class User(db.Model, SerializerMixin):
 
     @validates('username')
     def validates_username(self, key, username):
-        if username and len(username) >= 3:
+        if username and len(username) > 0:
             return username
         else:
             raise ValueError('Username is to short')

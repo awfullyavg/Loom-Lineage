@@ -23,7 +23,8 @@ function Signup () {
             fname: fname,
             lname: lname,
             email: email,
-            password: password
+            username: username,
+            _password_hash: password
         }
 
         fetch('/users', {

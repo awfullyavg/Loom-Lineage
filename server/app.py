@@ -1,5 +1,5 @@
 from flask_restful import Resource
-from flask import Flask, make_response, jsonify, request
+from flask import Flask, make_response, jsonify, request, session
 from models import User, Family, Loom, Event
 from config import db, app, api
 import os
@@ -24,7 +24,7 @@ class Users(Resource):
                 fname = data['fname'],
                 lname = data['lname'],
                 email = data['email'],
-                username= data['username'],
+                username = data['username'],
                 _password_hash = data['_password_hash']
             )
 
@@ -217,16 +217,25 @@ class EventsById(Resource):
         return make_response('DELETED', 204)
 api.add_resource(EventsById, '/events/<int:id>')
 
-# class Login(Resource):
+class Login(Resource):
 
-#     def get(self):
-#         pass
+    def get(self):
+        pass
 
-#     def post(self):
-#         user = User.query.filter(User.username == request.get_json()['username']).first()
-
-#         session['user_id'] = user.id
-# api.add_resource(Login, '/login')
+    def post(self):
+        data = request.get_json()
+        username = data['username']
+        user = User.query.filter(User.username == username).first()
+        #Grab password
+        # password = data['password']
+        # # print(user)
+        # #Test to see if password matches
+        # if user:
+        #     if user.authenticate(password):
+        #         session['user_id'] = user.id
+        return user.to_dict(), 200
+        # return make_response({'error': 'Invalid username or password'}, 401)
+api.add_resource(Login, '/login')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
