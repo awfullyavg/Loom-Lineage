@@ -1,13 +1,10 @@
-from flask_restful import Api, Resource
-from flask_migrate import Migrate
+from flask_restful import Resource
 from flask import Flask, make_response, jsonify, request
-from models import db, User, Family, Loom, Event
-from config import app
+from models import User, Family, Loom, Event
+from config import db, app, api
 import os
 
 
-
-api = Api(app)
 
 @app.route('/')
 def home():
