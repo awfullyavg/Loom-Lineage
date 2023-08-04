@@ -41,6 +41,7 @@ if __name__ == '__main__':
                     fname = 'Jane',
                     lname = 'Smith',
                     email = 'jane.smith@example.com',
+                    username = 'janesmith',
                     password = 'password123'
                     ),
 
