@@ -231,5 +231,16 @@ class EventsById(Resource):
         return make_response('DELETED', 204)
 api.add_resource(EventsById, '/events/<int:id>')
 
+# class Login(Resource):
+
+#     def get(self):
+#         pass
+
+#     def post(self):
+#         user = User.query.filter(User.username == request.get_json()['username']).first()
+
+#         session['user_id'] = user.id
+# api.add_resource(Login, '/login')
+
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
