@@ -8,7 +8,7 @@ import './index.css';
 
 
 function App() {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(null) //This is an empty user initially
 
   return (
     <div className='main'>
