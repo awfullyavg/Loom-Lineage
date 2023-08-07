@@ -39,7 +39,7 @@ function App() {
           <Route path='/loom' element={<Loom setUser={setUser} />} />
           <Route path='/familyform' element={<FamilyForm user={user}/>} />
           <Route path='/familytree' element={<FamilyTree />} />
-          <Route path='/familytable' element={<FamilyTable />} />
+          <Route path='/familytable' element={<FamilyTable user={user} />} />
         </Routes>
       </div>
 
