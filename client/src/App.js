@@ -9,6 +9,7 @@ import FamilyForm from './FamilyForm';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import './index.css';
 import FamilyTree from './FamilyTree';
+import FamilyTable from './FamilyTable';
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
           <Route path='/loom' element={<Loom setUser={setUser} />} />
           <Route path='/familyform' element={<FamilyForm user={user}/>} />
           <Route path='/familytree' element={<FamilyTree />} />
+          <Route path='/familytable' element={<FamilyTable />} />
         </Routes>
       </div>
 
