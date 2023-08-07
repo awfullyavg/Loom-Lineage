@@ -93,10 +93,6 @@ const formik = useFormik({
                 res.json().then(new_family => {
                     setFamilies([...families, new_family])
                     console.log(new_family)
-
-                    // navigate(`/entry/${entry.id}`)
-                    //can add state here to say it came from user entry submission
-                    //Add where you want it to go here / anything else you want it to do
                 })
             } else {
                 res.json().then(error => setError(error)) //for backend errors

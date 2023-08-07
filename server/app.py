@@ -49,7 +49,7 @@ api.add_resource(UsersById, '/users/<int:id>')
 
 class Families(Resource):
     def get(self):
-        family_list = [family.to_dict(rules=('-looms', '-user_id')) for family in Family.query.all()]
+        family_list = [family.to_dict(rules=('-looms',)) for family in Family.query.all()]
         return make_response(family_list, 200)
     
     def post(self):
@@ -247,7 +247,7 @@ class Login(Resource):
 api.add_resource(Login, '/login')
 
 class Logout(Resource):
-    def delete():
+    def delete(self):
         session['user_id'] = None
 
         response = make_response({}, 204)

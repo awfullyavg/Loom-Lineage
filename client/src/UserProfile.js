@@ -5,12 +5,13 @@ import { Link } from "react-router-dom";
 import Logout from "./Logout";
 
 
-function UserProfile ({user}) {
+function UserProfile ({user, setUser}) {
 // Need to make the following:
 // 1. Create a loom (Need a form. GET, POST, DELETE)
 // 2. Show Loom created. 
 // 3. Able to click the loom and create a family
 // 4. Need to make a family componnet and put family form in there
+
 
 
 console.log(user)
@@ -19,7 +20,7 @@ console.log(user)
             
 {/* --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */}
             <div className="loom-container">
-                <Loom />
+                <Loom user={user} />
             </div><br></br>
 
             <div>
@@ -32,7 +33,7 @@ console.log(user)
             </div><br></br>
 
             <div className='logout-container'>
-            <Logout />
+            <Logout setUser={setUser} />
             </div>
 
         </div>
