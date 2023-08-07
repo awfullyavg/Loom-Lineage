@@ -8,6 +8,7 @@ import Loom from './Loom';
 import FamilyForm from './FamilyForm';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import './index.css';
+import FamilyTree from './FamilyTree';
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
           <Route path='/profile/:id' element={<UserProfile user={user} setUser={setUser} />} />
           <Route path='/loom' element={<Loom setUser={setUser} />} />
           <Route path='/familyform' element={<FamilyForm user={user}/>} />
+          <Route path='/familytree' element={<FamilyTree />} />
         </Routes>
       </div>
 
