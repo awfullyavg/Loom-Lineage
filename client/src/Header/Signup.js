@@ -1,8 +1,9 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-
-function Signup () {
+//After sign up, take user to LoomForm
+function Signup ({loginUser, setLogin}) {
     const [users, setUsers] = useState([])
     const [fname, setFname] = useState('')
     const [lname, setLname] = useState('')
@@ -39,6 +40,35 @@ function Signup () {
         .then(new_user => setUsers([...users, new_user]))
 
         alert('Thank you for signing up!')
+    }
+
+    //Basic login functionality. Send them back to the homepage or dashboard
+    function handleLogin(e) {
+        e.preventDefault();
+
+        let username = e.target.username.value;
+        let password = e.target.password.value;
+
+        fetch("/login", {
+            method: "POST",
+            headers: {
+            "Content-Type": "application/json",
+            },
+            body: JSON.stringify( { username, password } )
+        }).then((resp) => {
+            if (resp.ok) {
+            resp.json().then((loginUser) => {
+                setLogin(loginUser)
+                handleNavigation(loginUser)
+            }); 
+        }
+        });
+}
+
+const navigate = useNavigate();
+    //Navigates to profile
+    function handleNavigation(user){
+        navigate(`/profile/${user.id}`)
     }
 
 

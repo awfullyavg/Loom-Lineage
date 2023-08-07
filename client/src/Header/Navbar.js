@@ -54,7 +54,7 @@ function Navbar () {
 
             <div>
                 {/* <button className="login-button-modal" onClick={handleOpen}>Login</button> */}
-                <Link to="/login" className="login">Login</Link>
+                <Link to="/login" className="login">Login</Link><br></br>
                 <Link to="/signup" className="sign-up">Signup</Link>
                 {/* <Modal className='' isOpen={open} onRequestClose={handleClose} contentLabel="Login" >
                     <h1>Please Login</h1>
