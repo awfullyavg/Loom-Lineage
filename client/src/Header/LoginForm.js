@@ -24,7 +24,7 @@ function LoginForm({user, setUser}){
             if (resp.ok) {
             resp.json().then((user) => {
                 setUser(user)
-                // navigate(`/user/${user.id}`)
+                handleNavigation(user)
             }); // <-------- navigates to the dashboard
         }
         });
@@ -33,9 +33,9 @@ function LoginForm({user, setUser}){
 
     //Navigation back to homepage or dashboard
 
-    // function handleNavigation(user){
-    //     navigate(`/user-dashboard/${user.id}`)
-    // }
+    function handleNavigation(user){
+        navigate(`/profile/${user.id}`)
+    }
 
     return(
     <>

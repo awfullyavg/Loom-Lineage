@@ -254,5 +254,18 @@ class Logout(Resource):
         return response
 api.add_resource(Logout, '/logout')
 
+class Check_Session(Resource):
+    def get(self):
+        user_id = session.get('user_id')
+
+        if user_id:
+            user = User.query.filter(User.id == user_id).first()
+
+            response = make_response(user.to_dict(), 200)
+        else:
+            response = make_response({}, 400)
+        return response
+api.add_resource(Check_Session, '/check_session')
+
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

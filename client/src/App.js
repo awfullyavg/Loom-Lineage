@@ -11,6 +11,8 @@ import './index.css';
 function App() {
   const [user, setUser] = useState(null) //This is an empty user initially
 
+
+
   return (
     <div className='main'>
       <div>
@@ -21,7 +23,7 @@ function App() {
           <Route path='/' element={<Home />}></Route>
           <Route path='/signup' element={<Signup user={user} />}></Route>
           <Route path='/login' element={<LoginForm user={user} setUser={setUser}/>}/>
-          <Route path='/profile' element={<UserProfile setUser={setUser} />} />
+          <Route path='/profile/:id' element={<UserProfile setUser={setUser} />} />
         </Routes>
       </div>
 
