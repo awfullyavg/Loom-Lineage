@@ -12,7 +12,6 @@ function UserProfile ({user, setUser}) {
 // 3. Able to click the loom and create a family
 // 4. Need to make a family componnet and put family form in there
 
-console.log(user)
     return (
         <div>
             
