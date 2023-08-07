@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import FamilyForm from "./FamilyForm";
 import Logout from "./Logout";
 
 
@@ -8,47 +9,48 @@ function UserProfile ({user, setUser}) {
 // 1. Create a loom (Need a form. GET, POST, DELETE)
 // 2. Show Loom created. 
 // 3. Able to click the loom and create a family
-//
-const [families, setFamilies] = useState([])
-const [name, setName] = useState('')
-const [mother, setMother] = useState('')
-const [father, setFather] = useState('')
-const [partner, setPartner] = useState('')
-const [children, setChildren] = useState('')
+// 4. Need to make a family componnet and put family form in there
+// 
+// const [families, setFamilies] = useState([])
+// const [name, setName] = useState('')
+// const [mother, setMother] = useState('')
+// const [father, setFather] = useState('')
+// const [partner, setPartner] = useState('')
+// const [children, setChildren] = useState('')
 
-useEffect(() => {
-    fetch("/families")
-    .then(resp => resp.json())
-    .then(data => setFamilies(data))
-}, [])
+// useEffect(() => {
+//     fetch("/families")
+//     .then(resp => resp.json())
+//     .then(data => setFamilies(data))
+// }, [])
 
-const handleSubmit = () => {
-    // e.preventDefault()
+// const handleSubmit = () => {
+//     // e.preventDefault()
 
-    const new_family = {
-        name: name,
-        mother: mother,
-        father: father,
-        partner: partner,
-        children: children
-    }
+//     const new_family = {
+//         name: name,
+//         mother: mother,
+//         father: father,
+//         partner: partner,
+//         children: children
+//     }
 
-    fetch('/families', {
-        method: 'POST',
-        headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-        },
-        body : JSON.stringify(new_family)
-    })
-    .then(resp => resp.json())
-    .then(new_family => setFamilies([...families, new_family]))
-}
+//     fetch('/families', {
+//         method: 'POST',
+//         headers: {
+//         'Accept': 'application/json',
+//         'Content-Type': 'application/json'
+//         },
+//         body : JSON.stringify(new_family)
+//     })
+//     .then(resp => resp.json())
+//     .then(new_family => setFamilies([...families, new_family]))
+// }
 
 
     return (
         <div>
-            <div className="loom-form">
+            {/* <div className="loom-form">
                 <form onSubmit={handleSubmit}>
                 <label>Enter your family's last name: </label><br></br>
                 <input type="text" placeholder="What do we call your family?" onChange={(e) => setName(e.target.value)} value={name}></input><br></br>
@@ -62,6 +64,10 @@ const handleSubmit = () => {
                 <input type="text" onChange={(e) => setChildren(e.target.value)} value={children} /><br></br>
                 <button className='bg-Chinese-Violet text-white'>Submit</button>
                 </form>
+            </div> */}
+
+            <div>
+                <FamilyForm user={user} />
             </div>
 
             <div className='logout-container'>
