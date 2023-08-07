@@ -233,8 +233,17 @@ class Login(Resource):
         # if user:
         #     if user.authenticate(password):
         #         session['user_id'] = user.id
-        return user.to_dict(), 200
         # return make_response({'error': 'Invalid username or password'}, 401)
+        if user:
+            session['user_id'] = user.id
+
+            response = make_response(
+                jsonify(user.to_dict(), 201))
+        else:
+            response = make_response({}, 404)
+        
+        return response
+
 api.add_resource(Login, '/login')
 
 if __name__ == '__main__':
