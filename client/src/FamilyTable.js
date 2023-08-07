@@ -12,10 +12,12 @@ function FamilyTable({ user }) {
         .then(data => setFamilies(data));
     }, []);
 
-    console.log(user)
-  
+    console.log(families)
+
     // Filter the families array based on the user_id
     const userFamilies = families.filter((family) => family.user_id == user.id);
+
+console.log(userFamilies)
   
     return (
       <div className="flex flex-col">
