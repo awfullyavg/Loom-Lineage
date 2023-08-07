@@ -13,7 +13,7 @@ function Logout ({setUser}) {
     return (
         <div>
             <div className='logout-container'>
-            <button>Logout</button>
+            <button onClick={handleLogout}>Logout</button>
             </div>
 
         </div>
