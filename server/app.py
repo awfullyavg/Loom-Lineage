@@ -62,6 +62,7 @@ class Families(Resource):
                 father= data['father'],
                 partner= data['partner'],
                 children= data['children'],
+                user_id= data['user_id']
             )
 
             db.session.add(new_family)
