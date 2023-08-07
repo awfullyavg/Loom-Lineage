@@ -1,15 +1,15 @@
 import React from "react";
 import Logout from "./Logout";
 
-function Logout () {
+function UserProfile () {
     return (
         <div>
             <div className='logout-container'>
-            <Logout/>
+            <Logout />
             </div>
 
         </div>
     )
 }
 
-export default Logout
+export default UserProfile

@@ -3,6 +3,7 @@ import Home from './Home/Home';
 import Header from './Header/Header';
 import Signup from './Header/Signup';
 import LoginForm from './Header/LoginForm';
+import UserProfile from './UserProfile';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import './index.css';
 
@@ -20,6 +21,7 @@ function App() {
           <Route path='/' element={<Home />}></Route>
           <Route path='/signup' element={<Signup user={user} />}></Route>
           <Route path='/login' element={<LoginForm user={user} setUser={setUser}/>}/>
+          <Route path='/profile' element={<UserProfile setUser={setUser} />} />
         </Routes>
       </div>
 

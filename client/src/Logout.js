@@ -1,6 +1,6 @@
 import React from "react";
 
-function Logout () {
+function Logout ({setUser}) {
 
 
     function handleLogout() {
