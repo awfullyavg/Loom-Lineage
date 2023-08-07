@@ -19,7 +19,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />}></Route>
           <Route path='/signup' element={<Signup user={user} />}></Route>
-          <Route path='/login' element={<LoginForm setUser={setUser}/>}/>
+          <Route path='/login' element={<LoginForm user={user} setUser={setUser}/>}/>
         </Routes>
       </div>
 

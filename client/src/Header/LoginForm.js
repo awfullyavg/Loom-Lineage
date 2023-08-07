@@ -1,7 +1,7 @@
 import React from "react"
 import { Link, useNavigate } from "react-router-dom"
 
-function LoginForm({setUser}){
+function LoginForm({user, setUser}){
 
     const navigate = useNavigate();
 
@@ -21,6 +21,7 @@ function LoginForm({setUser}){
         }).then((resp) => {
             if (resp.ok) {
             resp.json().then((user) => {
+                console.log(user)
                 setUser(user)
                 // navigate(`/user-dashboard/${user.id}`)
             }); // <-------- navigates to the dashboard
@@ -43,7 +44,8 @@ function LoginForm({setUser}){
              <input id = "username" type = "text" />
              <label>Password: </label>
              <input id = "password" type = "text" />
-             <button type = "submit">Login</button>
+             {/* Make a link to the specific user's id  */}
+             <button type = "submit">Login</button> 
          </form>
     </>
     )
