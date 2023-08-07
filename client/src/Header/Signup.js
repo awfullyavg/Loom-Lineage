@@ -42,7 +42,7 @@ function Signup ({loginUser, setLogin}) {
         alert('Thank you for signing up!')
     }
 
-    //Basic login functionality. Send them back to the homepage or dashboard
+
     function handleLogin(e) {
         e.preventDefault();
 

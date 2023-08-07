@@ -247,7 +247,7 @@ class Login(Resource):
 api.add_resource(Login, '/login')
 
 class Logout(Resource):
-    def delete():
+    def delete(self):
         session['user_id'] = None
 
         response = make_response({}, 204)
