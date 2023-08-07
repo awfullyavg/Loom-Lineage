@@ -238,7 +238,7 @@ class Login(Resource):
             session['user_id'] = user.id
 
             response = make_response(
-                jsonify(user.to_dict(), 201))
+                jsonify(user.to_dict()), 201)
         else:
             response = make_response({}, 404)
         

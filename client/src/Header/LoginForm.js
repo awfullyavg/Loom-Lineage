@@ -5,6 +5,8 @@ function LoginForm({user, setUser}){
 
     const navigate = useNavigate();
 
+    console.log(user)
+
     //Basic login functionality. Send them back to the homepage or dashboard
     function handleLogin(e) {
         e.preventDefault();
@@ -21,9 +23,8 @@ function LoginForm({user, setUser}){
         }).then((resp) => {
             if (resp.ok) {
             resp.json().then((user) => {
-                console.log(user)
                 setUser(user)
-                // navigate(`/user-dashboard/${user.id}`)
+                // navigate(`/user/${user.id}`)
             }); // <-------- navigates to the dashboard
         }
         });
