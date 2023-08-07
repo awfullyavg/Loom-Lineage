@@ -3,12 +3,9 @@ from sqlalchemy import MetaData
 from sqlalchemy.orm import validates
 from sqlalchemy_serializer import SerializerMixin
 from datetime import datetime
+from config import db, bcrypt
 
-metadata = MetaData(naming_convention={
-    "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
-})
 
-db = SQLAlchemy(metadata=metadata)
 
 class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
@@ -17,7 +14,16 @@ class User(db.Model, SerializerMixin):
     fname = db.Column(db.String)
     lname = db.Column(db.String)
     email = db.Column(db.String)
-    password = db.Column(db.String)
+    username = db.Column(db.String)
+    _password_hash = db.Column(db.String)
+
+    @validates('username')
+    def validates_username(self, key, username):
+        if username and len(username) > 0:
+            return username
+        else:
+            raise ValueError('Username is to short')
+
 
 
     #relationships

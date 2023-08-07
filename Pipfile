@@ -17,6 +17,8 @@ sqlalchemy-serializer = "*"
 pandas = "*"
 Flask-Restful = "*"
 Flask-Cors = "*"
+bcrypt = "*"
+flask-bcrypt = "*"
 
 [dev-packages]
 

@@ -6,16 +6,36 @@ import { useState } from "react";
 import Modal from 'react-modal';
 
 function Navbar () {
-    const [open, setOpen] = useState(false);
+    // const [open, setOpen] = useState(false);
     const myStyle = {height: '64px'}
 
-    const handleOpen = () => { //Opens Modal when login button clicked
-        setOpen(true)
-    }
+    // const handleOpen = () => { //Opens Modal when login button clicked
+    //     setOpen(true)
+    // }
 
-    const handleClose = () => { //Closes Modal when cliked anywhere outside the modal
-        setOpen(false)
-    }
+    // const handleClose = () => { //Closes Modal when cliked anywhere outside the modal
+    //     setOpen(false)
+    // }
+
+    // const handleLogin = (e) => {
+    //     e.preventDefault();
+
+    //     let username = e.target.username.value;
+
+    //     fetch("/login", {
+    //         method: "POST",
+    //         headers: {
+    //           "Content-Type": "application/json",
+    //         },
+    //         body: JSON.stringify( { username } ),
+    //       }).then((resp) => {
+    //         if (resp.ok) {
+    //           resp.json().then((user) => {
+    //             console.log(user)
+    //             setUser(user)});
+    //         }
+    //       });
+    // }
 
     return (
         <nav class="relative flex w-full flex-wrap items-center justify-between py-2 shadow-lg text-slate-500 hover:text-neutral-700 focus:text-neutral-700 bg-Ash-Gray lg:py-4">
@@ -33,21 +53,22 @@ function Navbar () {
             </div>
 
             <div>
-                <button className="login-button-modal" onClick={handleOpen}>Login</button>
+                {/* <button className="login-button-modal" onClick={handleOpen}>Login</button> */}
+                <Link to="/login" className="login">Login</Link>
                 <Link to="/signup" className="sign-up">Signup</Link>
-                <Modal className='' isOpen={open} onRequestClose={handleClose} contentLabel="Login" >
+                {/* <Modal className='' isOpen={open} onRequestClose={handleClose} contentLabel="Login" >
                     <h1>Please Login</h1>
                     <div>
-                        <form onSubmit={''}>
-                            <label>Email:</label><br></br>
-                            <input type="text" id="email" onChange={(e) => ('') } ></input><br></br>
+                        <form onSubmit={handleLogin}>
+                            <label>Username:</label><br></br>
+                            <input type="text" id="username"  ></input><br></br>
                             <label>Password:</label><br></br>
-                            <input type="password" id="password" onChange={(e) => ('') } ></input><br></br>
-                            <button className="login-button">Login</button>
+                            <input type="password" id="password" ></input><br></br>
+                            <button className="login-button" type="submit">Login</button>
                         </form>
                     </div>
 
-                </Modal>
+                </Modal> */}
                 
             </div>
             

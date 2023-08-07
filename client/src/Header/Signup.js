@@ -7,6 +7,7 @@ function Signup () {
     const [fname, setFname] = useState('')
     const [lname, setLname] = useState('')
     const [email, setEmail] = useState('')
+    const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
     useEffect(() => {
@@ -22,7 +23,8 @@ function Signup () {
             fname: fname,
             lname: lname,
             email: email,
-            password: password
+            username: username,
+            _password_hash: password
         }
 
         fetch('/users', {
@@ -51,6 +53,8 @@ function Signup () {
                 <input type="text" placeholder="Enter Last Name" onChange={(e) => setLname(e.target.value)} value={lname}></input><br></br>
                 <label>Email: </label><br></br>
                 <input type="text" placeholder="Enter Email" onChange={(e) => setEmail(e.target.value)} value={email}></input><br></br>
+                <label>Username: </label><br></br>
+                <input type="text" placeholder="Enter Username" onChange={(e) => setUsername(e.target.value)} value={username}></input><br></br>
                 <label>Password: </label><br></br>
                 <input type="password" onChange={(e) => setPassword(e.target.value)} value={password} /><br></br>
                 <br></br>

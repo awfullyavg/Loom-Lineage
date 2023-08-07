@@ -1,24 +1,10 @@
-from flask_restful import Api, Resource
-from flask_migrate import Migrate
-from flask import Flask, make_response, jsonify, request
-from models import db, User, Family, Loom, Event
+from flask_restful import Resource
+from flask import Flask, make_response, jsonify, request, session
+from models import User, Family, Loom, Event
+from config import db, app, api
 import os
 
-BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-DATABASE = os.environ.get(
-    "DB_URI", f"sqlite:///{os.path.join(BASE_DIR, 'app.db')}"
-)
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.json.compact = False
-
-migrate = Migrate(app, db)
-
-db.init_app(app)
-
-api = Api(app)
 
 @app.route('/')
 def home():
@@ -38,7 +24,8 @@ class Users(Resource):
                 fname = data['fname'],
                 lname = data['lname'],
                 email = data['email'],
-                password = data['password']
+                username = data['username'],
+                _password_hash = data['_password_hash']
             )
 
             db.session.add(new_user)
@@ -229,6 +216,56 @@ class EventsById(Resource):
         db.session.commit()
         return make_response('DELETED', 204)
 api.add_resource(EventsById, '/events/<int:id>')
+
+class Login(Resource):
+
+    def get(self):
+        pass
+
+    def post(self):
+        data = request.get_json()
+        username = data['username']
+        user = User.query.filter(User.username == username).first()
+        #Grab password
+        # password = data['password']
+        # # print(user)
+        # #Test to see if password matches
+        # if user:
+        #     if user.authenticate(password):
+        #         session['user_id'] = user.id
+        # return make_response({'error': 'Invalid username or password'}, 401)
+        if user:
+            session['user_id'] = user.id
+
+            response = make_response(
+                jsonify(user.to_dict()), 201)
+        else:
+            response = make_response({}, 404)
+        
+        return response
+api.add_resource(Login, '/login')
+
+class Logout(Resource):
+    def delete():
+        session['user_id'] = None
+
+        response = make_response({}, 204)
+
+        return response
+api.add_resource(Logout, '/logout')
+
+class Check_Session(Resource):
+    def get(self):
+        user_id = session.get('user_id')
+
+        if user_id:
+            user = User.query.filter(User.id == user_id).first()
+
+            response = make_response(user.to_dict(), 200)
+        else:
+            response = make_response({}, 400)
+        return response
+api.add_resource(Check_Session, '/check_session')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
