@@ -12,7 +12,7 @@ function Loom ({user, setUser}) {
             {/* Want to display the family tree above the table */}
     
             <h1>This is a Loom</h1>
-            <FamilyTable user={user} setUser={setUser} />
+
 
 
 

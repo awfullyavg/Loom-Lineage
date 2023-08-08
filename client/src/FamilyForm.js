@@ -8,42 +8,6 @@ import Logout from "./Logout";
 
 function FamilyForm ({user}) {
 
-// const [families, setFamilies] = useState([])
-// const [name, setName] = useState('')
-// const [mother, setMother] = useState('')
-// const [father, setFather] = useState('')
-// const [partner, setPartner] = useState('')
-// const [children, setChildren] = useState('')
-
-// useEffect(() => {
-//     fetch("/families")
-//     .then(resp => resp.json())
-//     .then(data => setFamilies(data))
-// }, [])
-
-// const handleSubmit = () => {
-//     // e.preventDefault()
-
-//     const new_family = {
-//         name: name,
-//         mother: mother,
-//         father: father,
-//         partner: partner,
-//         children: children
-//     }
-
-//     fetch('/families', {
-//         method: 'POST',
-//         headers: {
-//         'Accept': 'application/json',
-//         'Content-Type': 'application/json'
-//         },
-//         body : JSON.stringify(new_family)
-//     })
-//     .then(resp => resp.json())
-//     .then(new_family => setFamilies([...families, new_family]))
-// }
-
 const [error, setError] = useState() 
 const navigate = useNavigate()
 
