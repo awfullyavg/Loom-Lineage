@@ -12,7 +12,8 @@ def create_families():
             mother = fake.name(),
             father = fake.name(),
             partner = fake.name(),
-            children= fake.name()
+            children= fake.name(),
+            user_id = fake.random_int(min=1, max=4, step=1)
         )
         families.append(f)
 
