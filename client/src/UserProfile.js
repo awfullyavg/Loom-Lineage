@@ -28,9 +28,9 @@ console.log(user)
                 <Link to='/familyform'>Add a family</Link>
             </div><br></br>
 
-            <div>
+            {/* <div>
                 <Link to='/loom'>Create a loom!</Link>
-            </div><br></br>
+            </div><br></br> */}
 
             <div className='logout-container'>
             <Logout setUser={setUser} />
