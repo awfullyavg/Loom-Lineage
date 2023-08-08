@@ -34,8 +34,8 @@ console.log(user)
             </div><br></br>
 
             <div>
-                <h1>Events!</h1>
-                <Link to='/events'>Check out some cool Events</Link>
+                <h1>Events</h1>
+                <Link to='/events'>Create an event</Link>
             </div>
 
             <div className='logout-container'>
