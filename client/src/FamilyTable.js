@@ -5,6 +5,9 @@ import { useEffect, useState } from "react";
 
 function FamilyTable({ user, setUser }) {
     const [families, setFamilies] = useState([]);
+    // const [newFamily, setNewFamily] = useState({id: null,
+    // name:null})
+    const [buttonToggle, setButtonToggle] = useState(false)
 
     useEffect(() => {
       fetch("/check_session").then((response) => {
@@ -29,9 +32,48 @@ function FamilyTable({ user, setUser }) {
     // }, [])
     const userFamilies = families.filter((family) => family.user_id == user.id);
 
+    console.log(userFamilies[0])
 
-    console.log(userFamilies)
-  
+    function handleEditButton() {
+      
+    }
+
+    // console.log(families)
+
+    function handleSubmit (e) {
+      e.preventDefault()
+      console.log(e.target.id.value)
+      console.log(e.target.name.value)
+      console.log(e.target.father.value)
+      console.log(e.target.mother.value)
+      console.log(e.target.partner.value)
+      console.log(e.target.children.value)
+
+      const familyId = e.target.id.value;
+
+      const newFamily = {
+        id: familyId,
+        name: e.target.name.value,
+        mother: e.target.mother.value,
+        father: e.target.father.value,
+        partner: e.target.partner.value,
+        children: e.target.children.value
+      }
+      fetch(`/family/${newFamily.id}`, {
+        method: "PATCH",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newFamily)
+    })
+    .then(resp => resp.json())
+    .then((patchedFamily) => newFamily)
+
+    alert('Family has been patched')
+  }
+
+
     return (
       <div className="flex flex-col">
         <div className="overflow-x-auto">
@@ -103,6 +145,40 @@ function FamilyTable({ user, setUser }) {
                   ))}
                 </tbody>
               </table>
+            </div>
+            <div>
+                <button>Edit Loom</button>
+              </div>
+            <div>
+              <form onSubmit={handleSubmit}>
+                <div>
+                  <label>Family ID</label>
+                  <input id='id' type="text" /> 
+                </div>
+                <div>
+                  <label>Family Name</label>
+                  <input id='name' type="text"/>
+                </div><br></br>
+                <div>
+                  <label>Father</label>
+                  <input id='father' type="text"  />
+                </div><br></br>
+                <div>
+                  <label>Mother</label>
+                  <input id='mother' type="text"  />
+                </div><br></br>
+                <div>
+                  <label>Partner</label>
+                  <input id='partner' type="text"  />
+                </div><br></br>
+                <div>
+                  <label>Children</label>
+                  <textarea id="children" type="text" />
+                </div><br></br>
+                <div>
+                  <button>Save Changes</button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
