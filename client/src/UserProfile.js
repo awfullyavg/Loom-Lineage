@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import Loom from "./Loom";
+import FamilyTable from "./FamilyTable";
 import { Link } from "react-router-dom";
 import Logout from "./Logout";
 
@@ -20,7 +21,7 @@ console.log(user)
             
 {/* --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */}
             <div className="loom-container">
-                <Loom user={user} setUser={setUser} />
+                <FamilyTable user={user} setUser={setUser} />
             </div><br></br>
 
             <div>
