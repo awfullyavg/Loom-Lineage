@@ -20,12 +20,17 @@ function FamilyTable({ user, setUser }) {
         .then(data => setFamilies(data));
     }, []);
 
-    console.log(families)
+    // useEffect(() => {
+    //   const userFamilies = families.filter((family) => family.user_id == user.id);
 
-    // Filter the families array based on the user_id
+    //   setOneFamily(userFamilies)
+    //   console.log(userFamilies)
+
+    // }, [])
     const userFamilies = families.filter((family) => family.user_id == user.id);
 
-console.log(userFamilies)
+
+    console.log(userFamilies)
   
     return (
       <div className="flex flex-col">
@@ -71,7 +76,7 @@ console.log(userFamilies)
                     >
                       Children
                     </th>
-                    <th
+                    {/* <th
                       scope="col"
                       className="px-6 py-3 text-xs font-bold text-right text-gray-500 uppercase"
                     >
@@ -82,10 +87,10 @@ console.log(userFamilies)
                       className="px-6 py-3 text-xs font-bold text-right text-gray-500 uppercase"
                     >
                       Delete
-                    </th>
+                    </th> */}
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200">
+                {/* <tbody className="divide-y divide-gray-200">
                   {userFamilies.map((family) => (
                     <tr key={family.id}>
                       <td className="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap">
@@ -118,7 +123,7 @@ console.log(userFamilies)
                       </td>
                     </tr>
                   ))}
-                </tbody>
+                </tbody> */}
               </table>
             </div>
           </div>

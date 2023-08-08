@@ -3,10 +3,10 @@ import { useState, useEffect } from "react";
 import {useFormik} from "formik";
 import { object, string, number} from 'yup';
 import {useNavigate} from 'react-router-dom';
-import Logout from "./Logout";
 
 
-function FamilyForm ({user}) {
+
+function EditFamilyForm ({user}) {
 
 const [error, setError] = useState() 
 const navigate = useNavigate()
@@ -29,47 +29,47 @@ useEffect(() => {
 
 console.log(user)
 
-const formSchema = object({
-    name: string().required('Name must be atleast 2 characters long'),
+// const formSchema = object({
+//     name: string().required('Name must be atleast 2 characters long'),
 
-})
+// })
 
-const formik = useFormik({
-    initialValues: {
-        name: '',
-        mother: '',
-        father: '',
-        partner: '',
-        children: '',
-        user_id: ''
-    },
-    validationSchema: formSchema,
-    onSubmit: (values) =>{
-        fetch('/families' , {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(values)
-        })
-        .then(res => {
-            if (res.ok){
-                res.json().then(new_family => {
-                    setFamilies([...families, new_family])
-                    console.log(new_family)
-                })
-            } else {
-                res.json().then(error => setError(error)) //for backend errors
-            }
-        })
-    }
-})
+// const formik = useFormik({
+//     initialValues: {
+//         name: '',
+//         mother: '',
+//         father: '',
+//         partner: '',
+//         children: '',
+//         user_id: ''
+//     },
+//     validationSchema: formSchema,
+//     onSubmit: (values) =>{
+//         fetch('/families' , {
+//             method: "POST",
+//             headers: {
+//                 "Content-Type": "application/json"
+//             },
+//             body: JSON.stringify(values)
+//         })
+//         .then(res => {
+//             if (res.ok){
+//                 res.json().then(new_family => {
+//                     setFamilies([...families, new_family])
+//                     console.log(new_family)
+//                 })
+//             } else {
+//                 res.json().then(error => setError(error)) //for backend errors
+//             }
+//         })
+//     }
+// })
 
 
     return (
         <div>
-            <div className="loom-form">
-            <form onSubmit={formik.handleSubmit}>
+         <div className="loom-form">
+        <form onSubmit={handleSubmit}>
 
 <div className="family-name">
     <label> Enter family name</label>
@@ -127,4 +127,4 @@ const formik = useFormik({
     )
 }
 
-export default FamilyForm
+export default EditFamilyForm
