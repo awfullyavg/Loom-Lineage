@@ -179,6 +179,7 @@ class Events(Resource):
 
             db.session.add(new_event)
             db.session.commit()
+            return make_response(new_event.to_dict(), 201)
         
         except ValueError:
             return make_response('{errors:["validation errors"]}', 400)

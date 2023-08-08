@@ -25,13 +25,18 @@ console.log(user)
             </div><br></br>
 
             <div>
+
+            </div>
+
+            <div>
                 <h1>Family Form</h1>
                 <Link to='/familyform'>Add a family</Link>
             </div><br></br>
 
-            {/* <div>
-                <Link to='/loom'>Create a loom!</Link>
-            </div><br></br> */}
+            <div>
+                <h1>Events!</h1>
+                <Link to='/events'>Check out some cool Events</Link>
+            </div>
 
             <div className='logout-container'>
             <Logout setUser={setUser} />
