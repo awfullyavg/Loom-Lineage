@@ -3,8 +3,16 @@ import { useEffect, useState } from "react";
 
 
 
-function FamilyTable({ user }) {
+function FamilyTable({ user, setUser }) {
     const [families, setFamilies] = useState([]);
+
+    useEffect(() => {
+      fetch("/check_session").then((response) => {
+        if (response.ok) {
+          response.json().then((user) => setUser(user));
+        }
+      });
+    }, []);
   
     useEffect(() => {
       fetch("/families")

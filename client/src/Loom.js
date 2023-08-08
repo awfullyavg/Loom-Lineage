@@ -5,14 +5,14 @@ import FamilyTable from "./FamilyTable";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 //This is where the d3 family tree would go
-function Loom ({user}) {
+function Loom ({user, setUser}) {
     console.log(user)
     return (
         <div>
             {/* Want to display the family tree above the table */}
     
             <h1>This is a Loom</h1>
-            <FamilyTable user={user}  />
+            <FamilyTable user={user} setUser={setUser} />
 
 
 
