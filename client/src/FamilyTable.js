@@ -9,6 +9,7 @@ function FamilyTable({ user, setUser }) {
     // const [newFamily, setNewFamily] = useState({id: null,
     // name:null})
     const [isEditFormVisible, setIsEditFormVisible] = useState(false);
+    const [isDeleteFormVisible, setIsDeleteFormVisible] = useState(false);
 
 
     useEffect(() => {
@@ -28,10 +29,10 @@ function FamilyTable({ user, setUser }) {
 
 
     const userFamilies = families.filter((family) => family.user_id == user.id);
+ 
 
 
 
-    // console.log(families)
 
     function handleSubmit (e) {
       e.preventDefault()
@@ -84,6 +85,10 @@ function FamilyTable({ user, setUser }) {
   }
   const toggleEditForm = () => {
     setIsEditFormVisible(!isEditFormVisible);
+    console.log('clicked')
+  };
+  const toggleDeleteForm = () => {
+    setIsDeleteFormVisible(!isDeleteFormVisible);
     console.log('clicked')
   };
 
@@ -172,7 +177,7 @@ function FamilyTable({ user, setUser }) {
                 </div>
                 <div>
                   <label>Family Name</label>
-                  <input id='name' type="text"/>
+                  <input id='name' type="text" />
                 </div><br></br>
                 <div>
                   <label>Father</label>
@@ -200,12 +205,12 @@ function FamilyTable({ user, setUser }) {
                 <Link to='/familyform'>Add a family</Link>
             </div>
             <div>
-              <button onClick={toggleEditForm}>Delete A Family</button>
-              {isEditFormVisible && (
+              <button onClick={toggleDeleteForm}>Delete A Family</button>
+              {isDeleteFormVisible && (
               <div>
                 <form onSubmit={handleDelete}>
                   <label>Enter ID of the row you wish to delete</label>
-                  <input type="text" id="delete-form" />
+                  <input type="text" id="delete-form"  />
                   <button>Save Changes</button>
                 </form>
               </div>

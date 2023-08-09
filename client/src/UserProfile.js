@@ -15,7 +15,7 @@ function UserProfile ({user, setUser}) {
 
 
 
-console.log(user)
+
     return (
         <div>
             
