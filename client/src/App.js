@@ -6,6 +6,7 @@ import LoginForm from './Header/LoginForm';
 import UserProfile from './UserProfile';
 import Loom from './Loom';
 import FamilyForm from './FamilyForm';
+import Events from './Events';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import './index.css';
 
@@ -41,6 +42,7 @@ function App() {
           <Route path='/familyform' element={<FamilyForm user={user}/>} />
           {/* <Route path='/familytree' element={<FamilyTree />} /> */}
           <Route path='/familytable' element={<FamilyTable user={user} setUser={setUser}  />} />
+          <Route path='/events' element={<Events />} />
         </Routes>
       </div>
 
