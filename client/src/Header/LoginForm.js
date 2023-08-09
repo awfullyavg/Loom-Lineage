@@ -34,7 +34,7 @@ function LoginForm({user, setUser}){
     //Navigation back to homepage or dashboard
 
     function handleNavigation(user){
-        navigate(`/profile/${user.id}`)
+        navigate(`/profile`)
     }
 
     return(
