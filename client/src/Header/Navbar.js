@@ -2,12 +2,14 @@ import React from "react";
 import ReactDOM  from "react-dom";
 import Logo from "./Logo";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import {UserContext} from '../App';
 import Modal from 'react-modal';
 
 function Navbar () {
-    // const [open, setOpen] = useState(false);
     const myStyle = {height: '64px'}
+    const user = useContext(UserContext)
+
 
     // const handleOpen = () => { //Opens Modal when login button clicked
     //     setOpen(true)
@@ -70,6 +72,10 @@ function Navbar () {
 
                 </Modal> */}
                 <Link to='/profile' className="profile">Profile</Link>
+
+                <div>
+                    <h2>{`Hello ${user} again!`}</h2>
+                </div>
                 
             </div>
             

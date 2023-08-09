@@ -20,6 +20,7 @@ console.log(user)
         <div>
             
 {/* --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */}
+            
             <div className="loom-container">
                 <FamilyTable user={user} setUser={setUser} />
             </div><br></br>
@@ -28,15 +29,11 @@ console.log(user)
 
             </div>
 
-            <div>
-                <h1>Family Form</h1>
-                <Link to='/familyform'>Add a family</Link>
-            </div><br></br>
+
 
             <div>
-                <h1>Events</h1>
-                <Link to='/events'>Create an event</Link>
-            </div>
+                <Link to='/events'>Create an event!</Link>
+            </div><br></br>
 
             <div className='logout-container'>
             <Logout setUser={setUser} />

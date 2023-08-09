@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, createContext} from 'react';
 import Home from './Home/Home';
 import Header from './Header/Header';
 import Signup from './Header/Signup';
@@ -9,13 +9,12 @@ import FamilyForm from './FamilyForm';
 import Events from './Events';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import './index.css';
-
 import FamilyTable from './FamilyTable';
 
+export const UserContext = createContext()
 
 function App() {
   const [user, setUser] = useState(null) //This is an empty user initially
-  // const [oneFamily, setOneFamily] = useState([])
 
   useEffect(() => {
     fetch("/check_session").then((response) => {
@@ -25,12 +24,14 @@ function App() {
     });
   }, []);
 
-  console.log(user)
+
 
   return (
     <div className='main'>
       <div>
-        <Header />
+        <UserContext.Provider value={user}> 
+          <Header user={user} /> 
+        </UserContext.Provider>
       </div>
       <div>
         <Routes>

@@ -107,7 +107,7 @@ class FamiliesById(Resource):
         db.session.delete(families)
         db.session.commit()
         return make_response('DELETED', 204)
-api.add_resource(FamiliesById, '/family/<int:id>') #Should it be '/user/family/<int:id>' ?
+api.add_resource(FamiliesById, '/family/<int:id>') 
 
 
 class Looms(Resource):

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 
@@ -7,7 +8,8 @@ function FamilyTable({ user, setUser }) {
     const [families, setFamilies] = useState([]);
     // const [newFamily, setNewFamily] = useState({id: null,
     // name:null})
-    const [buttonToggle, setButtonToggle] = useState(false)
+    const [isEditFormVisible, setIsEditFormVisible] = useState(false);
+
 
     useEffect(() => {
       fetch("/check_session").then((response) => {
@@ -23,33 +25,24 @@ function FamilyTable({ user, setUser }) {
         .then(data => setFamilies(data));
     }, []);
 
-    // useEffect(() => {
-    //   const userFamilies = families.filter((family) => family.user_id == user.id);
 
-    //   setOneFamily(userFamilies)
-    //   console.log(userFamilies)
 
-    // }, [])
     const userFamilies = families.filter((family) => family.user_id == user.id);
 
-    console.log(userFamilies[0])
 
-    function handleEditButton() {
-      
-    }
 
     // console.log(families)
 
     function handleSubmit (e) {
       e.preventDefault()
-      console.log(e.target.id.value)
-      console.log(e.target.name.value)
-      console.log(e.target.father.value)
-      console.log(e.target.mother.value)
-      console.log(e.target.partner.value)
-      console.log(e.target.children.value)
+      // console.log(e.target.id.value)
+      // console.log(e.target.name.value)
+      // console.log(e.target.father.value)
+      // console.log(e.target.mother.value)
+      // console.log(e.target.partner.value)
+      // console.log(e.target.children.value)
 
-      const familyId = e.target.id.value;
+      const familyId = e.target.id.value
 
       const newFamily = {
         id: familyId,
@@ -72,6 +65,27 @@ function FamilyTable({ user, setUser }) {
 
     alert('Family has been patched')
   }
+
+  function handleDelete(e) {
+    e.preventDefault()
+    const familyId = e.target.id.value
+    const deletedFamily = {
+      id: familyId
+    }
+ 
+    fetch(`/family/${deletedFamily.id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+    alert('Family has been deleted :(')
+    
+  }
+  const toggleEditForm = () => {
+    setIsEditFormVisible(!isEditFormVisible);
+    console.log('clicked')
+  };
 
 
     return (
@@ -147,10 +161,11 @@ function FamilyTable({ user, setUser }) {
               </table>
             </div>
             <div>
-                <button>Edit Loom</button>
+                <button id='edit-loom-button' onClick={toggleEditForm}>Edit Loom</button>
               </div>
+              {isEditFormVisible && (
             <div>
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit} id='edit-loom'>
                 <div>
                   <label>Family ID</label>
                   <input id='id' type="text" /> 
@@ -179,6 +194,22 @@ function FamilyTable({ user, setUser }) {
                   <button>Save Changes</button>
                 </div>
               </form>
+            </div>
+              )}
+            <div>
+                <Link to='/familyform'>Add a family</Link>
+            </div>
+            <div>
+              <button onClick={toggleEditForm}>Delete A Family</button>
+              {isEditFormVisible && (
+              <div>
+                <form onSubmit={handleDelete}>
+                  <label>Enter ID of the row you wish to delete</label>
+                  <input type="text" id="delete-form" />
+                  <button>Save Changes</button>
+                </form>
+              </div>
+              )}
             </div>
           </div>
         </div>
