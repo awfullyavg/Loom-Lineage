@@ -34,20 +34,44 @@ function LoginForm({user, setUser}){
     //Navigation back to homepage or dashboard
 
     function handleNavigation(user){
-        navigate(`/profile/${user.id}`)
+        navigate(`/profile`)
     }
 
     return(
     <>
-         <h1>Login Form</h1>
-         <form onSubmit = {handleLogin}>
-             <label>Username: </label>
-             <input id = "username" type = "text" />
-             <label>Password: </label>
-             <input id = "password" type = "text" />
-             {/* Make a link to the specific user's id  */}
-             <button type = "submit">Login</button> 
-         </form>
+<div className="min-h-screen flex items-center justify-center bg-Nyanza">
+      <div className=" bg-slate-50 p-8 rounded shadow-md w-96">
+        <h1 className="text-2xl font-semibold mb-4">Login Form</h1>
+        <form onSubmit={handleLogin}>
+          <div className="mb-4">
+            <label htmlFor="username" className="block text-sm font-medium text-gray-700">
+              Username:
+            </label>
+            <input
+              id="username"
+              type="text"
+              className="mt-1 p-2 block w-full border rounded focus:ring-indigo-500 focus:border-indigo-500"
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+              Password:
+            </label>
+            <input
+              id="password"
+              type="password"
+              className="mt-1 p-2 block w-full border rounded focus:ring-indigo-500 focus:border-indigo-500"
+            />
+          </div>
+          <button
+            type="submit"
+            className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            Login
+          </button>
+        </form>
+      </div>
+    </div>
     </>
     )
 }
