@@ -69,7 +69,7 @@ function FamilyTable({ user, setUser }) {
 
   function handleDelete(e) {
     e.preventDefault()
-    const familyId = e.target.id.value
+    const familyId = e.target.querySelector('#delete-form').value
     const deletedFamily = {
       id: familyId
     }
