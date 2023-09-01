@@ -1,8 +1,13 @@
 import React from "react";
 
-function FamilyTree() {
+
+function FamilyTree({userFamilies}) {
+
+    console.log(userFamilies)
+    
     return (
         <div>
+
             
         </div>
 

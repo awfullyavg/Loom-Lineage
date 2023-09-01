@@ -15,11 +15,13 @@ DATABASE = os.environ.get(
 
 app = Flask(__name__)
 
-app.secret_key = "ABC123" # signature for Flask session
+
 
 app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.compact = False
+
+app.secret_key = b'\x8fd\xbe\xa2\x053\xfes\xe5n\x1a\xc9\xf6\xb3\xce{\x1b\xe0yr' # signature for Flask session
 
 metadata = MetaData(naming_convention={
     "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",

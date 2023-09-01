@@ -2,6 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData
 from sqlalchemy.orm import validates
 from sqlalchemy_serializer import SerializerMixin
+from sqlalchemy.ext.hybrid import hybrid_property
 from datetime import datetime
 from config import db, bcrypt
 
@@ -23,8 +24,18 @@ class User(db.Model, SerializerMixin):
             return username
         else:
             raise ValueError('Username is to short')
+    
+    @hybrid_property
+    def password_hash(self):
+        raise AttributeError("Password hashes may not be viewed.")
+    
+    @password_hash.setter
+    def password_hash(self, password):
+        password_hash = bcrypt.generate_password_hash(password.encode("utf-8"), bcrypt.gensalt())
+        self._password_hash = password_hash.decode("utf-8")
 
-
+    def authenticate(self, password):
+        return bcrypt.check_password_hash(self._password_hash, password.encode("utf-8"))
 
     #relationships
     loom_id = db.Column(db.Integer, db.ForeignKey('looms.id'))

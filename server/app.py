@@ -228,14 +228,14 @@ class Login(Resource):
         data = request.get_json()
         username = data['username']
         user = User.query.filter(User.username == username).first()
-        #Grab password
+        # Grab password
         # password = data['password']
         # # print(user)
         # #Test to see if password matches
         # if user:
         #     if user.authenticate(password):
         #         session['user_id'] = user.id
-        # return make_response({'error': 'Invalid username or password'}, 401)
+        #     return make_response({'error': 'Invalid username or password'}, 401)
         if user:
             session['user_id'] = user.id
 
@@ -245,7 +245,7 @@ class Login(Resource):
             response = make_response({}, 404)
         
         return response
-api.add_resource(Login, '/login')
+api.add_resource(Login, '/login', endpoint='login')
 
 class Logout(Resource):
     def delete(self):

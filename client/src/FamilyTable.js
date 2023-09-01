@@ -1,4 +1,5 @@
 import React from "react";
+import FamilyTree from "./FamilyTree";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
@@ -94,6 +95,8 @@ function FamilyTable({ user, setUser }) {
 
 
     return (
+      <div>
+        <FamilyTree userFamilies={userFamilies} />
       <div className="flex flex-col">
         <div className="overflow-x-auto">
           <div className="p-1.5 w-full inline-block align-middle">
@@ -218,6 +221,7 @@ function FamilyTable({ user, setUser }) {
             </div>
           </div>
         </div>
+      </div>
       </div>
     );
   }
