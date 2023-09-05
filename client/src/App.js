@@ -16,7 +16,7 @@ export const UserContext = createContext()
 function App() {
   const [user, setUser] = useState(null) //This is an empty user initially
 
-  useEffect(() => {
+  useEffect(() => { //this checks the session of the user and allows the unique user state. It displays unique data pertaining to the user.
     fetch("/check_session").then((response) => {
       if (response.ok) {
         response.json().then((user) => setUser(user));

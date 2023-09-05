@@ -3,12 +3,12 @@ import Navbar from "./Navbar";
 
 
 
-function Header () {
-    console.log()
+function Header ({user}) {
+
     return (
         <div>
             <div className='navbar-container'>
-                <Navbar />
+                <Navbar userCheck={user} />
             </div>
 
         </div>
