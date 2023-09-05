@@ -4,11 +4,22 @@ import Logo from "./Logo";
 import { Link } from "react-router-dom";
 import { useState, useContext } from "react";
 import {UserContext} from '../App';
+import { useEffect } from "react";
 import Modal from 'react-modal';
 
 function Navbar () {
     const myStyle = {height: '64px'}
     const user = useContext(UserContext)
+
+    function renderWelcomeMessage () {
+        if (user) {
+            return <h2 id='welcome-message'>{`Welcome back, ${user.fname}!`}</h2>
+        }
+        else {
+            return null
+        }
+
+    }
 
     return (
         <nav class="relative flex w-full flex-wrap items-center justify-between py-2 shadow-lg text-slate-500 hover:text-neutral-700 focus:text-neutral-700 bg-Ash-Gray lg:py-4">
@@ -30,7 +41,7 @@ function Navbar () {
                 <Link to="/signup" className="sign-up">Signup</Link><br></br>
                 <Link to='/profile' className="profile">Profile</Link>
                 <div>
-                    <h2>{`Welcome back, ${user}!`}</h2>
+                    {renderWelcomeMessage()}
                 </div>
             </div>
         </div>
