@@ -74,7 +74,7 @@ function Navbar () {
                 <Link to='/profile' className="profile">Profile</Link>
 
                 <div>
-                    <h2>{`Hello ${user} again!`}</h2>
+                    <h2>{`Welcome back, ${user}!`}</h2>
                 </div>
                 
             </div>
